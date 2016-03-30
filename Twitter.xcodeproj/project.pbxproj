@@ -14,6 +14,25 @@
 		8966D52F1CAC7E7200A8BDD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8966D52D1CAC7E7200A8BDD0 /* LaunchScreen.storyboard */; };
 		8966D53A1CAC7E7200A8BDD0 /* TwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5391CAC7E7200A8BDD0 /* TwitterTests.swift */; };
 		8966D5451CAC7E7200A8BDD0 /* TwitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5441CAC7E7200A8BDD0 /* TwitterUITests.swift */; };
+		8966D5591CAC7EC900A8BDD0 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5561CAC7EC900A8BDD0 /* SSKeychain.m */; };
+		8966D55A1CAC7EC900A8BDD0 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5581CAC7EC900A8BDD0 /* SSKeychainQuery.m */; };
+		8966D56F1CAC7EF100A8BDD0 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D55C1CAC7EF100A8BDD0 /* Alamofire.swift */; };
+		8966D5701CAC7EF100A8BDD0 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D55D1CAC7EF100A8BDD0 /* Download.swift */; };
+		8966D5711CAC7EF100A8BDD0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D55E1CAC7EF100A8BDD0 /* Error.swift */; };
+		8966D5741CAC7EF100A8BDD0 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5611CAC7EF100A8BDD0 /* Manager.swift */; };
+		8966D5751CAC7EF100A8BDD0 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5621CAC7EF100A8BDD0 /* MultipartFormData.swift */; };
+		8966D5761CAC7EF100A8BDD0 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5631CAC7EF100A8BDD0 /* NetworkReachabilityManager.swift */; };
+		8966D5771CAC7EF100A8BDD0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5641CAC7EF100A8BDD0 /* Notifications.swift */; };
+		8966D5781CAC7EF100A8BDD0 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5651CAC7EF100A8BDD0 /* ParameterEncoding.swift */; };
+		8966D5791CAC7EF100A8BDD0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5661CAC7EF100A8BDD0 /* Request.swift */; };
+		8966D57A1CAC7EF100A8BDD0 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5671CAC7EF100A8BDD0 /* Response.swift */; };
+		8966D57B1CAC7EF100A8BDD0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5681CAC7EF100A8BDD0 /* ResponseSerialization.swift */; };
+		8966D57C1CAC7EF100A8BDD0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5691CAC7EF100A8BDD0 /* Result.swift */; };
+		8966D57D1CAC7EF100A8BDD0 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56A1CAC7EF100A8BDD0 /* ServerTrustPolicy.swift */; };
+		8966D57E1CAC7EF100A8BDD0 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56B1CAC7EF100A8BDD0 /* Stream.swift */; };
+		8966D57F1CAC7EF100A8BDD0 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56C1CAC7EF100A8BDD0 /* Timeline.swift */; };
+		8966D5801CAC7EF100A8BDD0 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56D1CAC7EF100A8BDD0 /* Upload.swift */; };
+		8966D5811CAC7EF100A8BDD0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56E1CAC7EF100A8BDD0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +66,29 @@
 		8966D5401CAC7E7200A8BDD0 /* TwitterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwitterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8966D5441CAC7E7200A8BDD0 /* TwitterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUITests.swift; sourceTree = "<group>"; };
 		8966D5461CAC7E7200A8BDD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8966D5541CAC7EC800A8BDD0 /* Twitter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twitter-Bridging-Header.h"; sourceTree = "<group>"; };
+		8966D5551CAC7EC900A8BDD0 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		8966D5561CAC7EC900A8BDD0 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		8966D5571CAC7EC900A8BDD0 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		8966D5581CAC7EC900A8BDD0 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		8966D55B1CAC7EF100A8BDD0 /* Alamofire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alamofire.h; sourceTree = "<group>"; };
+		8966D55C1CAC7EF100A8BDD0 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		8966D55D1CAC7EF100A8BDD0 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		8966D55E1CAC7EF100A8BDD0 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		8966D5611CAC7EF100A8BDD0 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		8966D5621CAC7EF100A8BDD0 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		8966D5631CAC7EF100A8BDD0 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		8966D5641CAC7EF100A8BDD0 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		8966D5651CAC7EF100A8BDD0 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		8966D5661CAC7EF100A8BDD0 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		8966D5671CAC7EF100A8BDD0 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		8966D5681CAC7EF100A8BDD0 /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
+		8966D5691CAC7EF100A8BDD0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		8966D56A1CAC7EF100A8BDD0 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		8966D56B1CAC7EF100A8BDD0 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		8966D56C1CAC7EF100A8BDD0 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		8966D56D1CAC7EF100A8BDD0 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		8966D56E1CAC7EF100A8BDD0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +119,8 @@
 		8966D5181CAC7E7200A8BDD0 = {
 			isa = PBXGroup;
 			children = (
+				8966D5521CAC7E8500A8BDD0 /* Alamofire */,
+				8966D5531CAC7E8E00A8BDD0 /* KeyChain */,
 				8966D5231CAC7E7200A8BDD0 /* Twitter */,
 				8966D5381CAC7E7200A8BDD0 /* TwitterTests */,
 				8966D5431CAC7E7200A8BDD0 /* TwitterUITests */,
@@ -123,6 +167,43 @@
 				8966D5461CAC7E7200A8BDD0 /* Info.plist */,
 			);
 			path = TwitterUITests;
+			sourceTree = "<group>";
+		};
+		8966D5521CAC7E8500A8BDD0 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				8966D55B1CAC7EF100A8BDD0 /* Alamofire.h */,
+				8966D55C1CAC7EF100A8BDD0 /* Alamofire.swift */,
+				8966D55D1CAC7EF100A8BDD0 /* Download.swift */,
+				8966D55E1CAC7EF100A8BDD0 /* Error.swift */,
+				8966D5611CAC7EF100A8BDD0 /* Manager.swift */,
+				8966D5621CAC7EF100A8BDD0 /* MultipartFormData.swift */,
+				8966D5631CAC7EF100A8BDD0 /* NetworkReachabilityManager.swift */,
+				8966D5641CAC7EF100A8BDD0 /* Notifications.swift */,
+				8966D5651CAC7EF100A8BDD0 /* ParameterEncoding.swift */,
+				8966D5661CAC7EF100A8BDD0 /* Request.swift */,
+				8966D5671CAC7EF100A8BDD0 /* Response.swift */,
+				8966D5681CAC7EF100A8BDD0 /* ResponseSerialization.swift */,
+				8966D5691CAC7EF100A8BDD0 /* Result.swift */,
+				8966D56A1CAC7EF100A8BDD0 /* ServerTrustPolicy.swift */,
+				8966D56B1CAC7EF100A8BDD0 /* Stream.swift */,
+				8966D56C1CAC7EF100A8BDD0 /* Timeline.swift */,
+				8966D56D1CAC7EF100A8BDD0 /* Upload.swift */,
+				8966D56E1CAC7EF100A8BDD0 /* Validation.swift */,
+			);
+			name = Alamofire;
+			sourceTree = "<group>";
+		};
+		8966D5531CAC7E8E00A8BDD0 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				8966D5551CAC7EC900A8BDD0 /* SSKeychain.h */,
+				8966D5561CAC7EC900A8BDD0 /* SSKeychain.m */,
+				8966D5571CAC7EC900A8BDD0 /* SSKeychainQuery.h */,
+				8966D5581CAC7EC900A8BDD0 /* SSKeychainQuery.m */,
+				8966D5541CAC7EC800A8BDD0 /* Twitter-Bridging-Header.h */,
+			);
+			name = KeyChain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +337,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8966D5761CAC7EF100A8BDD0 /* NetworkReachabilityManager.swift in Sources */,
+				8966D5791CAC7EF100A8BDD0 /* Request.swift in Sources */,
+				8966D55A1CAC7EC900A8BDD0 /* SSKeychainQuery.m in Sources */,
+				8966D5771CAC7EF100A8BDD0 /* Notifications.swift in Sources */,
+				8966D56F1CAC7EF100A8BDD0 /* Alamofire.swift in Sources */,
 				8966D5271CAC7E7200A8BDD0 /* ViewController.swift in Sources */,
+				8966D57C1CAC7EF100A8BDD0 /* Result.swift in Sources */,
+				8966D57E1CAC7EF100A8BDD0 /* Stream.swift in Sources */,
+				8966D57A1CAC7EF100A8BDD0 /* Response.swift in Sources */,
+				8966D5741CAC7EF100A8BDD0 /* Manager.swift in Sources */,
+				8966D5781CAC7EF100A8BDD0 /* ParameterEncoding.swift in Sources */,
+				8966D5701CAC7EF100A8BDD0 /* Download.swift in Sources */,
+				8966D57F1CAC7EF100A8BDD0 /* Timeline.swift in Sources */,
+				8966D5811CAC7EF100A8BDD0 /* Validation.swift in Sources */,
+				8966D57D1CAC7EF100A8BDD0 /* ServerTrustPolicy.swift in Sources */,
 				8966D5251CAC7E7200A8BDD0 /* AppDelegate.swift in Sources */,
+				8966D5751CAC7EF100A8BDD0 /* MultipartFormData.swift in Sources */,
+				8966D5801CAC7EF100A8BDD0 /* Upload.swift in Sources */,
+				8966D5711CAC7EF100A8BDD0 /* Error.swift in Sources */,
+				8966D57B1CAC7EF100A8BDD0 /* ResponseSerialization.swift in Sources */,
+				8966D5591CAC7EC900A8BDD0 /* SSKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,10 +499,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WSUV.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Twitter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -410,10 +513,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WSUV.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Twitter-Bridging-Header.h";
 			};
 			name = Release;
 		};
