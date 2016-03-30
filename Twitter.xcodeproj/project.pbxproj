@@ -33,6 +33,7 @@
 		8966D57F1CAC7EF100A8BDD0 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56C1CAC7EF100A8BDD0 /* Timeline.swift */; };
 		8966D5801CAC7EF100A8BDD0 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56D1CAC7EF100A8BDD0 /* Upload.swift */; };
 		8966D5811CAC7EF100A8BDD0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D56E1CAC7EF100A8BDD0 /* Validation.swift */; };
+		8966D5831CAC7F7C00A8BDD0 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5821CAC7F7C00A8BDD0 /* Tweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		8966D56C1CAC7EF100A8BDD0 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		8966D56D1CAC7EF100A8BDD0 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		8966D56E1CAC7EF100A8BDD0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		8966D5821CAC7F7C00A8BDD0 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				8966D5241CAC7E7200A8BDD0 /* AppDelegate.swift */,
 				8966D5261CAC7E7200A8BDD0 /* ViewController.swift */,
 				8966D5281CAC7E7200A8BDD0 /* Main.storyboard */,
+				8966D5821CAC7F7C00A8BDD0 /* Tweet.swift */,
 				8966D52B1CAC7E7200A8BDD0 /* Assets.xcassets */,
 				8966D52D1CAC7E7200A8BDD0 /* LaunchScreen.storyboard */,
 				8966D5301CAC7E7200A8BDD0 /* Info.plist */,
@@ -358,6 +361,7 @@
 				8966D5711CAC7EF100A8BDD0 /* Error.swift in Sources */,
 				8966D57B1CAC7EF100A8BDD0 /* ResponseSerialization.swift in Sources */,
 				8966D5591CAC7EC900A8BDD0 /* SSKeychain.m in Sources */,
+				8966D5831CAC7F7C00A8BDD0 /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
