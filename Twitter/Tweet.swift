@@ -8,12 +8,16 @@
 
 import Foundation
 
-class Tweet {
+class Tweet: Hashable {
     var tweet_id : Int
     var username : String
     var isDeleted : Bool
     var tweet : String
     var date : NSDate
+    
+    var hashValue: Int {
+        return tweet_id
+    }
     
     init(id : Int, name : String, twt : String, dat : NSDate){
         tweet_id = id
@@ -22,4 +26,8 @@ class Tweet {
         tweet = twt
         date = dat
     }
+}
+
+func ==(lhs: Tweet, rhs: Tweet) -> Bool {
+    return lhs.tweet_id == rhs.tweet_id
 }

@@ -60,13 +60,68 @@ class twitterTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let tweets = appDelegate.tweets
+        let tweet = tweets![indexPath.row]
 
-        // Configure the cell...
-
+        cell.textLabel?.numberOfLines = 0   // multi-line label
+        cell.textLabel?.attributedText = attributedStringForTweet(tweet)
+        
         return cell
     }
     
-
+    lazy var tweetDateFormatter : NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .ShortStyle
+        return dateFormatter
+    }()
+    
+    let tweetTitleAtributes = [
+        NSFontAttributeName : UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline),
+        NSForegroundColorAttributeName : UIColor.purpleColor()
+    ]
+    
+    lazy var tweetBodyAttributes : [String : AnyObject] = {
+        let textStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        textStyle.lineBreakMode = .ByWordWrapping
+        textStyle.alignment = .Left
+        let bodyAttributes = [
+            NSFontAttributeName : UIFont.preferredFontForTextStyle(UIFontTextStyleBody),
+            NSForegroundColorAttributeName : UIColor.blackColor(),
+            NSParagraphStyleAttributeName : textStyle
+        ]
+        return bodyAttributes
+    }()
+    
+    var tweetAttributedStringMap : [Tweet : NSAttributedString] = [:]
+    
+    func attributedStringForTweet(tweet : Tweet) -> NSAttributedString {
+        let attrbutedString = tweetAttributedStringMap[tweet]
+        if let string = attrbutedString { // already stored?
+            return string
+        }
+        
+        let dateString = tweetDateFormatter.stringFromDate(tweet.date)
+        let title = String(format: "%@ - %@\n", tweet.username, dateString)
+        
+        let tweetAttributedString = NSMutableAttributedString(string: title, attributes: tweetTitleAtributes)
+        let bodyAttributedString = NSAttributedString(string: tweet.tweet, attributes: tweetBodyAttributes)
+        
+        tweetAttributedString.appendAttributedString(bodyAttributedString)
+        tweetAttributedStringMap[tweet] = tweetAttributedString
+        return tweetAttributedString
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 
     
     @IBAction func manageAccount(sender: AnyObject) {
