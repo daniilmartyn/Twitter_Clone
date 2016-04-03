@@ -9,20 +9,20 @@
 import Foundation
 
 class Tweet: Hashable {
-    var tweet_id : Int
+    var tweet_id : Int64
     var username : String
     var isDeleted : Bool
     var tweet : String
     var date : NSDate
     
     var hashValue: Int {
-        return tweet_id
+        return tweet_id.hashValue
     }
     
-    init(id : Int, name : String, twt : String, dat : NSDate){
+    init(id : Int64, name : String, del : Bool, twt : String, dat : NSDate){
         tweet_id = id
         username = name
-        isDeleted = false
+        isDeleted = del
         tweet = twt
         date = dat
     }

@@ -19,9 +19,22 @@ class twitterTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        
         self.title = "Tweets!"
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(
+            kAddTweetNotification,
+            object: nil,
+            queue: nil) { (note : NSNotification) -> Void in
+                if !self.refreshControl!.refreshing {
+                    self.refreshControl!.beginRefreshing()
+                    self.tweetsRefresh(self)
+                }
+                
+            }
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -29,11 +42,76 @@ class twitterTableViewController: UITableViewController {
 
     
     func fetchTweets(){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "PST")
+        let lastTweetDate = appDelegate.lastTweetDate() // get date of latest stored tweet
+        let dateStr = dateFormatter.stringFromDate(lastTweetDate)
+        
+        // If successfully fetched new tweets
+        
+        //let kBaseURLString = "https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin"
+        let kBaseURLString = "https://ezekiel.encs.vancouver.wsu.edu/~cs458/cgi-bin"
+        
+        
+        request(.GET, kBaseURLString + "/get-tweets.cgi", parameters: ["date" : dateStr])
+            .validate(statusCode : 200..<500)
+            .validate(contentType: ["application/json"])
+            .responseJSON{ response in
+                switch(response.result){
+                case .Success(let JSON):        // successfuly fetched tweets
+                    let dict = JSON as! [String : AnyObject]
+                    let tweets = dict["tweets"] as! [[String: AnyObject]]
+                    
+                    for i in 0 ..< tweets.count {
+                        let info = tweets[i] as NSDictionary
+                        let date = dateFormatter.dateFromString(info["time_stamp"] as! String)
+                        
+                        //let id = info["tweet_id"] as! Int64
+                        let name = info["username"] as! String
+                        let del = info["isdeleted"] as! Bool
+                        let twt = info["tweet"] as! String
+
+                        let tempid = Int64(i)
+                        
+                        let tweet = Tweet(id: tempid, name: name, del: del, twt: twt, dat: date!)
+                        
+                        appDelegate.tweets.insert(tweet, atIndex: 0)
+                    }
+                    
+                    
+                    self.tableView.reloadData()
+                case .Failure(let error):
+                    let message : String
+                    if let httpStatusCode = response.response?.statusCode {
+                        switch(httpStatusCode) {
+                        case 500:
+                            message = "Internal Server Error: something wrong on our side"
+                        case 503:
+                            message = "Database Unavailable: unable to connect"
+                        default:
+                            message = "Error \(httpStatusCode)"
+                        }
+                    } else {  // probably network or server timeout
+                        message = error.localizedDescription
+                    }
+                    
+                    let alertController = UIAlertController(
+                        title: "Error Fetching Items",
+                        message: message,
+                        preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)                    
+                }
+        }
         
         
         self.refreshControl?.endRefreshing()
     }
+    
+    
     
     @IBAction func tweetsRefresh(sender: AnyObject) {
         NSLog("fetching tweets!")
@@ -50,11 +128,8 @@ class twitterTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        if let tweets = appDelegate.tweets {
-            return tweets.count
-        }else{
-            return 0
-        }
+        let tweets = appDelegate.tweets
+        return tweets.count
     }
 
     
@@ -64,7 +139,7 @@ class twitterTableViewController: UITableViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let tweets = appDelegate.tweets
-        let tweet = tweets![indexPath.row]
+        let tweet = tweets[indexPath.row]
 
         cell.textLabel?.numberOfLines = 0   // multi-line label
         cell.textLabel?.attributedText = attributedStringForTweet(tweet)

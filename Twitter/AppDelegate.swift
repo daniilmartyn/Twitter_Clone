@@ -8,15 +8,27 @@
 
 import UIKit
 
+let kAddTweetNotification = "kAddTweetNotification"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var tweets : [Tweet]?
+    var tweets = [Tweet]()
+    
+    func lastTweetDate() -> NSDate{
+        
+        if tweets.count == 0 {
+            return NSDate.distantPast()
+        } else {
+            return tweets.first!.date
+        }
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
         return true
     }
 
