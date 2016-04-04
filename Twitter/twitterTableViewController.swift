@@ -66,17 +66,17 @@ class twitterTableViewController: UITableViewController {
                     let tweets = dict["tweets"] as! [[String: AnyObject]]
                     
                     for i in 0 ..< tweets.count {
-                        let info = tweets[i] as NSDictionary
+                        let info = tweets[i]
                         let date = dateFormatter.dateFromString(info["time_stamp"] as! String)
                         
-                        //let id = info["tweet_id"] as! Int64
+                        let tweetID = info["tweet_id"] as! Int
                         let name = info["username"] as! String
                         let del = info["isdeleted"] as! Bool
                         let twt = info["tweet"] as! String
 
-                        let tempid = Int64(i)
+                        //let tempid = Int64(i)
                         
-                        let tweet = Tweet(id: tempid, name: name, del: del, twt: twt, dat: date!)
+                        let tweet = Tweet(id: tweetID, name: name, del: del, twt: twt, dat: date!)
                         
                         appDelegate.tweets.insert(tweet, atIndex: 0)
                     }
