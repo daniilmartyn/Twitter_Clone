@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var tweets = [Tweet]()
+    var loggedin : Bool = false
     
     func lastTweetDate() -> NSDate{
         

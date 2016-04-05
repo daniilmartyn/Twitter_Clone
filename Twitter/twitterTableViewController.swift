@@ -200,11 +200,181 @@ class twitterTableViewController: UITableViewController {
 
     
     @IBAction func manageAccount(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        NSLog("Open Up Menu for account stuff")
+        if appDelegate.loggedin {
+            let alertController = UIAlertController(
+                title: "Manage Account",
+                message: nil,
+                preferredStyle: .ActionSheet)
+            
+            alertController.addAction(UIAlertAction(
+                title: "Cancel",
+                style: .Cancel,
+                handler: nil))
+            alertController.addAction(UIAlertAction(
+                title: "Logout",
+                style: .Default,
+                handler: {(UIAlertAction) -> Void in
+                    self.logout()}))
+            
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                let popoverPresenter = alertController.popoverPresentationController
+                popoverPresenter?.sourceView = sender as? UIView
+                popoverPresenter?.sourceRect = sender.bounds
+            }
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(
+                title: "Manage Account",
+                message: nil,
+                preferredStyle: .ActionSheet)
+            
+            alertController.addAction(UIAlertAction(
+                title: "Cancel",
+                style: .Cancel,
+                handler: nil))
+            alertController.addAction(UIAlertAction(
+                title: "Register",
+                style: .Default,
+                handler: {(UIAlertAction) -> Void in
+                    self.registerAlert()}))
+            alertController.addAction(UIAlertAction(
+                title: "Login",
+                style: .Default,
+                handler: {(UIAlertAction) -> Void in
+                    self.loginAlert()}))
+            
+            
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                let popoverPresenter = alertController.popoverPresentationController
+                popoverPresenter?.sourceView = sender as? UIView
+                popoverPresenter?.sourceRect = sender.bounds
+            }
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func addTweet(sender: AnyObject) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        if appDelegate.loggedin {
+        
+            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("addTweetNavController")
+            controller?.modalPresentationStyle = .Popover
+            presentViewController(controller!, animated: true, completion: nil)
+        } else {
+            self.loginAlert()
+        }
     }
     
     
+    
+    func loginAlert(){
+        let alertController = UIAlertController(title: "Login", message: "Please Log In", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Login", style: .Default, handler: { _ in
+            let usernameTextField = alertController.textFields![0]
+            let passwordTextField = alertController.textFields![1]
+            
+            let username = usernameTextField.text!
+            let password = passwordTextField.text!
+            
+            if username.isEmpty || password.isEmpty {
+                let alert = UIAlertController(
+                    title: "Empty!",
+                    message: "The username or password field is not filled",
+                    preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: {_ in
+                    self.loginAlert()
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else {
+                self.login(username, password: password)
+            }
+            
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addTextFieldWithConfigurationHandler{ (textField : UITextField) -> Void in
+            textField.placeholder = "Username"
+        }
+        alertController.addTextFieldWithConfigurationHandler{ (textField : UITextField) -> Void in
+            textField.secureTextEntry = true
+            textField.placeholder = "Password"
+        }
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func login(username : String, password : String){
+        NSLog("loging in User with username: \(username) and password \(password)")
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.loggedin = true
+    }
+    
+    func logout(){
+        NSLog("Logout now")
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.loggedin = false
+    }
+    
+    func registerAlert(){
+        let alertController = UIAlertController(title: "Register", message: "Create Username and Password", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Submit", style: .Default, handler: { _ in
+            let usernameTextField = alertController.textFields![0]
+            let passwordTextField = alertController.textFields![1]
+            let confirmTextField = alertController.textFields![2]
+            
+            let username = usernameTextField.text!
+            let password = passwordTextField.text!
+            let confirm = confirmTextField.text!
+            
+            if username.characters.count < 3 {
+                let alert = UIAlertController(
+                    title: "Invalid Username!",
+                    message: "Username must be at least 3 characters long",
+                    preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                    self.registerAlert()}))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if password.characters.count < 8 || (password != confirm) {
+                let alert = UIAlertController(
+                    title: "Bogus Password",
+                    message: "Password too short or not confirmed!",
+                    preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                    self.registerAlert()}))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
+            
+            /// XXXX register the user now!
+            self.register(username, password: password)
+            
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addTextFieldWithConfigurationHandler{ (textField : UITextField) -> Void in
+            textField.placeholder = "Username"
+        }
+        alertController.addTextFieldWithConfigurationHandler{ (textField : UITextField) -> Void in
+            textField.secureTextEntry = true
+            textField.placeholder = "Password"
+        }
+        alertController.addTextFieldWithConfigurationHandler{ (textField: UITextField) -> Void in
+            textField.secureTextEntry = true
+            textField.placeholder = "Confirm"
+        }
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func register(username : String, password : String){
+        NSLog("Registering the User now")
+    }
     
     /*
     // MARK: - Navigation

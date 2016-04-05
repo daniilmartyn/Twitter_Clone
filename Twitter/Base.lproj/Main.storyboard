@@ -37,7 +37,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add Tweet" id="B3u-lh-jOD">
                             <connections>
-                                <segue destination="MFJ-7N-O98" kind="presentation" id="sZ8-0L-buz"/>
+                                <action selector="addTweet:" destination="HGh-cK-Wca" id="3RZ-Dr-ztY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -122,7 +122,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Es5-S4-5kL">
             <objects>
-                <navigationController id="MFJ-7N-O98" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="addTweetNavController" id="MFJ-7N-O98" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2hC-2a-3Qv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
