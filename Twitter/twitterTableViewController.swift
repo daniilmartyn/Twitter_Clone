@@ -23,6 +23,7 @@ class twitterTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        // XXX NetworkActivityIndicatorManager.sharedManager.isEnabled = true
         
         self.title = "Tweets!"
         addTweetButton.enabled = false
@@ -37,6 +38,7 @@ class twitterTableViewController: UITableViewController {
                 }
                 
             }
+        
     }
 
     
