@@ -10,6 +10,10 @@ import UIKit
 
 class twitterTableViewController: UITableViewController {
 
+    
+    @IBOutlet weak var addTweetButton: UIBarButtonItem!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +25,7 @@ class twitterTableViewController: UITableViewController {
         
         
         self.title = "Tweets!"
+        addTweetButton.enabled = false
         
         NSNotificationCenter.defaultCenter().addObserverForName(
             kAddTweetNotification,
@@ -258,16 +263,10 @@ class twitterTableViewController: UITableViewController {
     
     @IBAction func addTweet(sender: AnyObject) {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        if appDelegate.loggedin {
-        
             let controller = self.storyboard?.instantiateViewControllerWithIdentifier("addTweetNavController")
             controller?.modalPresentationStyle = .Popover
             presentViewController(controller!, animated: true, completion: nil)
-        } else {
-            self.loginAlert()
-        }
+
     }
     
     
@@ -311,12 +310,14 @@ class twitterTableViewController: UITableViewController {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.loggedin = true
+        addTweetButton.enabled = true
     }
     
     func logout(){
         NSLog("Logout now")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.loggedin = false
+        addTweetButton.enabled = false
     }
     
     func registerAlert(){

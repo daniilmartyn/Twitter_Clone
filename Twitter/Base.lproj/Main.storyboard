@@ -47,6 +47,9 @@
                             <action selector="tweetsRefresh:" destination="HGh-cK-Wca" eventType="valueChanged" id="x2B-a4-SI5"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="addTweetButton" destination="B3u-lh-jOD" id="ftO-Ky-MM2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KJj-bv-Efc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

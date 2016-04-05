@@ -9,6 +9,7 @@
 import UIKit
 
 let kAddTweetNotification = "kAddTweetNotification"
+let kTwitterPassService = "WSUVTwitterPassword"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
