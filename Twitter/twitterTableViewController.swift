@@ -40,6 +40,13 @@ class twitterTableViewController: UITableViewController {
         
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if !self.refreshControl!.refreshing {
+            self.refreshControl!.beginRefreshing()
+            self.tweetsRefresh(self)
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
