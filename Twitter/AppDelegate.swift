@@ -10,6 +10,8 @@ import UIKit
 
 let kAddTweetNotification = "kAddTweetNotification"
 let kTwitterPassService = "WSUVTwitterPassword"
+//let kBaseURLString = "https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin"
+let kBaseURLString = "https://ezekiel.encs.vancouver.wsu.edu/~cs458/cgi-bin"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

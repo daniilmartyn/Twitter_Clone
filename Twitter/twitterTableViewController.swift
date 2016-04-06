@@ -13,10 +13,6 @@ class twitterTableViewController: UITableViewController {
     
     @IBOutlet weak var addTweetButton: UIBarButtonItem!
     
-    //let kBaseURLString = "https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin"
-    let kBaseURLString = "https://ezekiel.encs.vancouver.wsu.edu/~cs458/cgi-bin"
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +36,7 @@ class twitterTableViewController: UITableViewController {
                     self.tweetsRefresh(self)
                 }
                 
-            }
+        }
         
     }
 
@@ -79,8 +75,6 @@ class twitterTableViewController: UITableViewController {
                         let name = info["username"] as! String
                         let del = info["isdeleted"] as! Bool
                         let twt = info["tweet"] as! String
-
-                        //let tempid = Int64(i)
                         
                         let tweet = Tweet(id: tweetID, name: name, del: del, twt: twt, dat: date!)
                         
@@ -116,7 +110,6 @@ class twitterTableViewController: UITableViewController {
         
         self.refreshControl?.endRefreshing()
     }
-    
     
     
     @IBAction func tweetsRefresh(sender: AnyObject) {
