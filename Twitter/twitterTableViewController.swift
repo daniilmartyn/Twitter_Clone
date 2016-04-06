@@ -13,6 +13,9 @@ class twitterTableViewController: UITableViewController {
     
     @IBOutlet weak var addTweetButton: UIBarButtonItem!
     
+    //let kBaseURLString = "https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin"
+    let kBaseURLString = "https://ezekiel.encs.vancouver.wsu.edu/~cs458/cgi-bin"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,10 +61,6 @@ class twitterTableViewController: UITableViewController {
         let dateStr = dateFormatter.stringFromDate(lastTweetDate)
         
         // If successfully fetched new tweets
-        
-        //let kBaseURLString = "https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin"
-        let kBaseURLString = "https://ezekiel.encs.vancouver.wsu.edu/~cs458/cgi-bin"
-        
         
         request(.GET, kBaseURLString + "/get-tweets.cgi", parameters: ["date" : dateStr])
             .validate(statusCode : 200..<500)
@@ -308,18 +307,110 @@ class twitterTableViewController: UITableViewController {
     }
     
     func login(username : String, password : String){
-        NSLog("loging in User with username: \(username) and password \(password)")
+        //NSLog("loging in User with username: \(username) and password \(password)")
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.loggedin = true
-        addTweetButton.enabled = true
+        
+        let urlString = kBaseURLString + "/login.cgi"
+        let parameters = [
+            "username" : username,  // username and password
+            "password" : password,  // obtained from user
+            "action" : "login"
+        ]
+        
+        request(.POST, urlString, parameters: parameters)
+            .responseJSON { response in
+                switch(response.result){
+                case .Success(let JSON):
+                    let dict = JSON as! [String: AnyObject]
+                    let token = dict["session_token"] as! String
+                    
+                    appDelegate.username = username
+                    SSKeychain.setPassword(password, forService: kTwitterPassService, account: username)
+                    SSKeychain.setPassword(token, forService: kTwitterPassService, account: username+"token")
+                    appDelegate.loggedin = true
+                    self.addTweetButton.enabled = true
+                    self.title = "Tweets! (\(username))"
+                case .Failure(let error):
+                    let message : String
+                    if let httpStatusCode = response.response?.statusCode {
+                        switch(httpStatusCode) {
+                        case 500:
+                            message = "Internal Server Error: something wrong on our side"
+                        case 400:
+                            message = "Both username and password not provided!"
+                        case 401:
+                            message = "Wrong Password!"
+                        case 404:
+                            message = "No such user!"
+                        default:
+                            message = "Error \(httpStatusCode)"
+                        }
+                    } else {  // probably network or server timeout
+                        message = error.localizedDescription
+                    }
+                    
+                    let alertController = UIAlertController(
+                        title: "Error Fetching Items",
+                        message: message,
+                        preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+            }
+
     }
     
     func logout(){
         NSLog("Logout now")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.loggedin = false
-        addTweetButton.enabled = false
+        
+        let urlString = kBaseURLString + "/login.cgi"
+        let parameters = [
+            "username" : appDelegate.username,  // username and password
+            "password" : SSKeychain.passwordForService(kTwitterPassService, account: appDelegate.username),  // obtained from keychain
+            "action" : "logout"
+        ]
+        
+        request(.POST, urlString, parameters: parameters)
+            .responseJSON { response in
+                switch(response.result){
+                case .Success(let JSON):
+                    let dict = JSON as! [String: AnyObject]
+                    let token = dict["session_token"] as! String
+                    
+                    SSKeychain.setPassword(token, forService: kTwitterPassService, account: appDelegate.username!+"token")
+                    appDelegate.loggedin = false
+                    self.addTweetButton.enabled = false
+                    self.title = "Tweets!"
+                case .Failure(let error):
+                    let message : String
+                    if let httpStatusCode = response.response?.statusCode {
+                        switch(httpStatusCode) {
+                        case 500:
+                            message = "Internal Server Error: something wrong on our side"
+                        case 400:
+                            message = "Both username and password not provided!"
+                        case 401:
+                            message = "Unauthorized!"
+                        case 404:
+                            message = "No such user!"
+                        default:
+                            message = "Error \(httpStatusCode)"
+                        }
+                    } else {  // probably network or server timeout
+                        message = error.localizedDescription
+                    }
+                    
+                    let alertController = UIAlertController(
+                        title: "Error Fetching Items",
+                        message: message,
+                        preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+        }
+
     }
     
     func registerAlert(){
@@ -355,8 +446,6 @@ class twitterTableViewController: UITableViewController {
                 return
             }
             
-            
-            /// XXXX register the user now!
             self.register(username, password: password)
             
         }))
@@ -377,6 +466,56 @@ class twitterTableViewController: UITableViewController {
     
     func register(username : String, password : String){
         NSLog("Registering the User now")
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let urlString = kBaseURLString + "/register.cgi"
+        let parameters = [
+            "username" : username,  // username and password
+            "password" : password,  // obtained from user
+        ]
+        
+        request(.POST, urlString, parameters: parameters)
+            .responseJSON { response in
+                switch(response.result){
+                case .Success(let JSON):
+                    let dict = JSON as! [String: AnyObject]
+                    let token = dict["session_token"] as! String
+                    
+                    appDelegate.username = username
+                    SSKeychain.setPassword(password, forService: kTwitterPassService, account: username)
+                    SSKeychain.setPassword(token, forService: kTwitterPassService, account: username+"token")
+                    appDelegate.loggedin = true
+                    self.addTweetButton.enabled = true
+                    self.title = "Tweets! (\(username))"
+                case .Failure(let error):
+                    let message : String
+                    if let httpStatusCode = response.response?.statusCode {
+                        switch(httpStatusCode) {
+                        case 500:
+                            message = "Internal Server Error: something wrong on our side"
+                        case 400:
+                            message = "Both username and password not provided!"
+                        case 409:
+                            message = "Username already exists!"
+                        default:
+                            message = "Error \(httpStatusCode)"
+                        }
+                    } else {  // probably network or server timeout
+                        message = error.localizedDescription
+                    }
+                    
+                    let alertController = UIAlertController(
+                        title: "Error Fetching Items",
+                        message: message,
+                        preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+        }
+
+        
+        
     }
     
     /*
