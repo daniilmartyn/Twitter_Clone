@@ -89,7 +89,7 @@ class addTweetTableViewController: UITableViewController, UITextViewDelegate {
         request(.POST, urlString, parameters: parameters)
             .responseJSON { response in
                 switch(response.result){
-                case .Success(let JSON):
+                case .Success( _):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kAddTweetNotification, object: nil))
                 case .Failure(let error):
                     let message : String

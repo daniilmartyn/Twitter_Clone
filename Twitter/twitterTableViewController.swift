@@ -35,7 +35,6 @@ class twitterTableViewController: UITableViewController {
                     self.refreshControl!.beginRefreshing()
                     self.tweetsRefresh(self)
                 }
-                
         }
         
     }
@@ -63,6 +62,8 @@ class twitterTableViewController: UITableViewController {
         let lastTweetDate = appDelegate.lastTweetDate() // get date of latest stored tweet
         let dateStr = dateFormatter.stringFromDate(lastTweetDate)
         
+        
+        NSLog("Latest stored tweet: \(lastTweetDate)")
         // If successfully fetched new tweets
         
         request(.GET, kBaseURLString + "/get-tweets.cgi", parameters: ["date" : dateStr])
@@ -354,7 +355,8 @@ class twitterTableViewController: UITableViewController {
                         title: "Error Fetching Items",
                         message: message,
                         preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                        self.loginAlert()}))
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
             }

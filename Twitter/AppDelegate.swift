@@ -32,9 +32,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func archivePath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(
+            .DocumentDirectory,
+            .UserDomainMask,
+            true)
+        
+        let sandBoxDir : NSString = paths[0]
+        let archiveName = sandBoxDir.stringByAppendingPathComponent("tweets.plist")
+        return archiveName
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        let archiveName = archivePath()
+        if(NSFileManager.defaultManager().fileExistsAtPath(archiveName)){
+            
+            NSLog("Archive already exists")
+            let archive = NSArray(contentsOfFile: archiveName)
+            
+            for index in archive! {
+                let tweet = index as! [String:AnyObject]
+                
+                tweets.append(Tweet(
+                    id: tweet["tweet_id"] as! Int,
+                    name: tweet["username"] as! String,
+                    del: tweet["isDeleted"] as! Bool,
+                    twt: tweet["tweet"] as! String,
+                    dat: tweet["date"] as! NSDate))
+            }
+        }else{
+            NSLog("no archive, do things as normal")
+        }
+        
         return true
     }
 
@@ -46,6 +77,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        let archiveName = archivePath()
+        
+        var list : [[String:AnyObject]] = []
+        
+        
+        for tweet in tweets {
+            let tweet_dict = [
+                "tweet_id" : tweet.tweet_id,
+                "username" : tweet.username,
+                "isDeleted" : tweet.isDeleted,
+                "tweet" : tweet.tweet,
+                "date" : tweet.date
+            ]
+            list.append(tweet_dict)
+        }
+        
+        let archive = list as NSArray
+        archive.writeToFile(archiveName, atomically: true)
+        
+        NSLog("wrote the archive")
+        
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
