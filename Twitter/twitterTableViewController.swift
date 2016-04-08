@@ -84,9 +84,12 @@ class twitterTableViewController: UITableViewController {
                         let del = info["isdeleted"] as! Bool
                         let twt = info["tweet"] as! String
                         
-                        let tweet = Tweet(id: tweetID, name: name, del: del, twt: twt, dat: date!)
                         
-                        appDelegate.tweets.insert(tweet, atIndex: 0)
+                        if !del {
+                            let tweet = Tweet(id: tweetID, name: name, del: del, twt: twt, dat: date!)
+                        
+                            appDelegate.tweets.insert(tweet, atIndex: 0)
+                        }
                     }
                     
                     
