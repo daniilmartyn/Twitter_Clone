@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var tweets = [Tweet]()
     var loggedin : Bool = false
     
-    var username : String?
+    var username : String? = ""
     
     func lastTweetDate() -> NSDate{
         

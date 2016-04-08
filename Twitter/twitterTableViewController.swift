@@ -93,8 +93,13 @@ class twitterTableViewController: UITableViewController {
                         
                         if !del {
                             let tweet = Tweet(id: tweetID, name: name, del: del, twt: twt, dat: date!)
-                        
                             appDelegate.tweets.insert(tweet, atIndex: 0)
+                        } else {
+                            for tweet in appDelegate.tweets {
+                                if tweet.tweet_id == tweetID {
+                                    appDelegate.tweets.removeAtIndex(appDelegate.tweets.indexOf(tweet)!)
+                                }
+                            }
                         }
                     }
                     

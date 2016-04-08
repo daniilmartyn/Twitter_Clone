@@ -125,6 +125,7 @@
 		8966D5181CAC7E7200A8BDD0 = {
 			isa = PBXGroup;
 			children = (
+				89D00B5E1CB84007007D43AB /* ActivityIndicator */,
 				8966D5521CAC7E8500A8BDD0 /* Alamofire */,
 				8966D5531CAC7E8E00A8BDD0 /* KeyChain */,
 				8966D5231CAC7E7200A8BDD0 /* Twitter */,
@@ -213,6 +214,14 @@
 				8966D5541CAC7EC800A8BDD0 /* Twitter-Bridging-Header.h */,
 			);
 			name = KeyChain;
+			sourceTree = "<group>";
+		};
+		89D00B5E1CB84007007D43AB /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ActivityIndicator;
+			path = Twitter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
