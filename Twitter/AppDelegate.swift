@@ -43,6 +43,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return archiveName
     }
     
+    func archivePathUser() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(
+            .DocumentDirectory,
+            .UserDomainMask,
+            true)
+        
+        let sandBoxDir : NSString = paths[0]
+        let archiveName = sandBoxDir.stringByAppendingPathComponent("user.plist")
+        return archiveName
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
@@ -63,7 +74,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     dat: tweet["date"] as! NSDate))
             }
         }else{
-            NSLog("no archive, do things as normal")
+            NSLog("no tweet archive, do things as normal")
+        }
+        
+        let userArchive = archivePathUser()
+        if(NSFileManager.defaultManager().fileExistsAtPath(userArchive)){
+            NSLog("restoring logged in info")
+            let archive = NSDictionary(contentsOfFile: userArchive)
+            username = archive!["username"] as? String
+            loggedin = archive!["loggedin"] as! Bool
+            
+            NSLog("username now is: \(username) and status is \(loggedin)")
+            
         }
         
         return true
@@ -97,6 +119,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let archive = list as NSArray
         archive.writeToFile(archiveName, atomically: true)
         
+        
+        
+        let userPathArchive = archivePathUser()
+        let userDict : [String: AnyObject] = [
+            "username" : username!,
+            "loggedin" : loggedin
+        ]
+    
+        let archiveUser = userDict as NSDictionary
+        archiveUser.writeToFile(userPathArchive, atomically: true)
         NSLog("wrote the archive")
         
     }

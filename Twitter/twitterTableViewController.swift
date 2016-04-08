@@ -23,9 +23,15 @@ class twitterTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         // XXX NetworkActivityIndicatorManager.sharedManager.isEnabled = true
-        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
         self.title = "Tweets!"
-        addTweetButton.enabled = false
+        
+        if(appDelegate.loggedin){
+            addTweetButton.enabled = true
+        }else {
+            addTweetButton.enabled = false
+        }
         
         NSNotificationCenter.defaultCenter().addObserverForName(
             kAddTweetNotification,
@@ -386,6 +392,7 @@ class twitterTableViewController: UITableViewController {
                     
                     SSKeychain.setPassword(token, forService: kTwitterPassService, account: appDelegate.username!+"token")
                     appDelegate.loggedin = false
+                    appDelegate.username = ""
                     self.addTweetButton.enabled = false
                     self.title = "Tweets!"
                 case .Failure(let error):
