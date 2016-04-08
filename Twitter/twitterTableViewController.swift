@@ -530,9 +530,74 @@ class twitterTableViewController: UITableViewController {
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
         }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let deleteTweet = appDelegate.tweets[indexPath.row]
+        
+        if (deleteTweet.username == appDelegate.username ){
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let deleteTweet = appDelegate.tweets[indexPath.row]
+            
+            let urlString = kBaseURLString + "/del-tweet.cgi"
+            let parameters : [String:AnyObject] = [
+                "username" : appDelegate.username!,
+                "session_token" : SSKeychain.passwordForService(kTwitterPassService, account: appDelegate.username!+"token"),
+                "tweet_id" : deleteTweet.tweet_id
+            ]
+            
+            
+            
+            request(.POST, urlString, parameters: parameters)
+                .responseJSON { response in
+                    switch(response.result){
+                    case .Success(let JSON):
+                        //let dict = JSON as! [String: AnyObject]
+                        appDelegate.tweets.removeAtIndex(appDelegate.tweets.indexOf(deleteTweet)!)
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    case .Failure(let error):
+                        let message : String
+                        if let httpStatusCode = response.response?.statusCode {
+                            switch(httpStatusCode) {
+                            case 500:
+                                message = "Internal Server Error: something wrong on our side"
+                            case 400:
+                                message = "All parameters not provided!"
+                            case 401:
+                                message = "Unauthorized!"
+                            case 403:
+                                message = "Not the user's tweet!"
+                            case 404:
+                                message = "No such user or no tweet found!"
+                            default:
+                                message = "Error \(httpStatusCode)"
+                            }
+                        } else {  // probably network or server timeout
+                            message = error.localizedDescription
+                        }
+                        
+                        let alertController = UIAlertController(
+                            title: "Error Fetching Items",
+                            message: message,
+                            preferredStyle: .Alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+            }
+        }
 
-        
-        
     }
     
     /*
