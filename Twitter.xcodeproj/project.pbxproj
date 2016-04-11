@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		893DD1E31CBC3E7900A9DB90 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DD1E21CBC3E7900A9DB90 /* NetworkActivityIndicatorManager.swift */; };
 		8966D5251CAC7E7200A8BDD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5241CAC7E7200A8BDD0 /* AppDelegate.swift */; };
 		8966D5271CAC7E7200A8BDD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966D5261CAC7E7200A8BDD0 /* ViewController.swift */; };
 		8966D52A1CAC7E7200A8BDD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8966D5281CAC7E7200A8BDD0 /* Main.storyboard */; };
@@ -56,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		893DD1E11CBC3E7900A9DB90 /* AlamofireNetworkActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlamofireNetworkActivityIndicator.h; sourceTree = "<group>"; };
+		893DD1E21CBC3E7900A9DB90 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		8966D5211CAC7E7200A8BDD0 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8966D5241CAC7E7200A8BDD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8966D5261CAC7E7200A8BDD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 		89D00B5E1CB84007007D43AB /* ActivityIndicator */ = {
 			isa = PBXGroup;
 			children = (
+				893DD1E11CBC3E7900A9DB90 /* AlamofireNetworkActivityIndicator.h */,
+				893DD1E21CBC3E7900A9DB90 /* NetworkActivityIndicatorManager.swift */,
 			);
 			name = ActivityIndicator;
 			path = Twitter;
@@ -359,6 +364,7 @@
 				8966D5791CAC7EF100A8BDD0 /* Request.swift in Sources */,
 				8966D55A1CAC7EC900A8BDD0 /* SSKeychainQuery.m in Sources */,
 				8966D5771CAC7EF100A8BDD0 /* Notifications.swift in Sources */,
+				893DD1E31CBC3E7900A9DB90 /* NetworkActivityIndicatorManager.swift in Sources */,
 				8966D56F1CAC7EF100A8BDD0 /* Alamofire.swift in Sources */,
 				8966D5271CAC7E7200A8BDD0 /* ViewController.swift in Sources */,
 				8966D57C1CAC7EF100A8BDD0 /* Result.swift in Sources */,

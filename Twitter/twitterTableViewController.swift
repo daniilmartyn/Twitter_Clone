@@ -563,7 +563,7 @@ class twitterTableViewController: UITableViewController {
             request(.POST, urlString, parameters: parameters)
                 .responseJSON { response in
                     switch(response.result){
-                    case .Success(let JSON):
+                    case .Success(_):
                         //let dict = JSON as! [String: AnyObject]
                         appDelegate.tweets.removeAtIndex(appDelegate.tweets.indexOf(deleteTweet)!)
                         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
