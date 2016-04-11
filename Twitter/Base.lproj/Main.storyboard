@@ -103,6 +103,7 @@
                                                 <constraint firstItem="i2l-jr-04R" firstAttribute="top" secondItem="1k1-bs-bUZ" secondAttribute="bottom" constant="8" id="qj8-qs-hFn"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.98565180519417517" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

@@ -279,7 +279,15 @@ class twitterTableViewController: UITableViewController {
         
             let controller = self.storyboard?.instantiateViewControllerWithIdentifier("addTweetNavController")
             controller?.modalPresentationStyle = .Popover
-            presentViewController(controller!, animated: true, completion: nil)
+        
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let popoverPresenter = controller!.popoverPresentationController
+            popoverPresenter?.barButtonItem = sender as? UIBarButtonItem
+        }
+        
+        presentViewController(controller!, animated: true, completion: nil)
+
 
     }
     
