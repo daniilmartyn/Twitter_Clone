@@ -241,8 +241,7 @@ class twitterTableViewController: UITableViewController {
             
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 let popoverPresenter = alertController.popoverPresentationController
-                popoverPresenter?.sourceView = sender as? UIView
-                popoverPresenter?.sourceRect = sender.bounds
+                popoverPresenter?.barButtonItem = sender as? UIBarButtonItem
             }
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
@@ -269,8 +268,7 @@ class twitterTableViewController: UITableViewController {
             
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 let popoverPresenter = alertController.popoverPresentationController
-                popoverPresenter?.sourceView = sender as? UIView
-                popoverPresenter?.sourceRect = sender.bounds
+                popoverPresenter?.barButtonItem = sender as? UIBarButtonItem
             }
             self.presentViewController(alertController, animated: true, completion: nil)
         }
